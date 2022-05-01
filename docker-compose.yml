@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app_api:
+    image: moneytransferapi:1.0
+    ports:
+      - 5500:5500
+    environment:
+      TEST: env_docker_compose
+    build: ./
+
+  app_front:
+    image: moneytransferfront:1.0
+    ports:
+      - 3000:3000
+    environment:
+      TEST: env_docker_compose
+    build: ./
