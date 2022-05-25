@@ -15,7 +15,7 @@ public class TransferObjectTest {
         suiteStartTime = System.nanoTime();
         TransferAmount amount = new TransferAmount(1000, "rub");
         TransferRequest transferRequest = new TransferRequest("1234123412341234", "1234", "123", "2345234523452345", amount);
-        transferObject = new TransferObject(transferRequest, "1");
+        transferObject = new TransferObject(transferRequest, "1", TransactionStatus.AWAIT_CONFIRMATION);
     }
 
     @AfterAll
@@ -43,7 +43,7 @@ public class TransferObjectTest {
         String cardToNumber = "2345234523452345";
         TransferAmount amount = new TransferAmount(1000, "rub");
         double commission = 10;
-        boolean accepted = false;
+        TransactionStatus transactionStatus = TransactionStatus.AWAIT_CONFIRMATION;
 
         assertEquals(id, transferObject.getId());
         assertEquals(cardFromNumber, transferObject.getCardFromNumber());
@@ -53,6 +53,6 @@ public class TransferObjectTest {
         assertEquals(amount.getValue(), transferObject.getAmount().getValue());
         assertEquals(amount.getCurrency(), transferObject.getAmount().getCurrency());
         assertEquals(commission, transferObject.getCommission());
-        assertEquals(accepted, transferObject.getAccepted());
+        assertEquals(transactionStatus, transferObject.getTransactionStatus());
     }
 }

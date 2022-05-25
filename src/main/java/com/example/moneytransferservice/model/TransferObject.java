@@ -12,9 +12,9 @@ public class TransferObject {
     private final String cardToNumber;
     private final TransferAmount amount;
     private final double commission;
-    private boolean accepted = false;
+    private TransactionStatus transactionStatus;
 
-    public TransferObject(TransferRequest request, String id) {
+    public TransferObject(TransferRequest request, String id, TransactionStatus transactionStatus) {
         cardFromNumber = request.getCardFromNumber();
         cardFromValidTill = request.getCardFromValidTill();
         cardFromCVV = request.getCardFromCVV();
@@ -22,14 +22,7 @@ public class TransferObject {
         amount = request.getAmount();
         commission = Math.round(amount.getValue() * TransferRepository.COMMISSION);
         this.id = id;
-    }
-
-    public boolean getAccepted() {
-        return accepted;
-    }
-
-    public void accept() {
-        this.accepted = true;
+        this.transactionStatus = transactionStatus;
     }
 
     @Override
@@ -42,7 +35,7 @@ public class TransferObject {
                 ", cardToNumber='" + cardToNumber + '\'' +
                 ", amount=" + amount +
                 ", commission=" + commission +
-                ", accepted=" + accepted +
+                ", accepted=" + transactionStatus +
                 '}';
     }
 }

@@ -1,8 +1,6 @@
 package com.example.moneytransferservice.repository;
 
-import com.example.moneytransferservice.model.Confirmation;
-import com.example.moneytransferservice.model.TransferObject;
-import com.example.moneytransferservice.model.TransferRequest;
+import com.example.moneytransferservice.model.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class TransferRepository {
     private final ConcurrentHashMap<String, TransferObject> transfers = new ConcurrentHashMap<>();
     public static final float COMMISSION = 0.01F;
+
 
     public String putTransferObject(TransferObject transferObject) {
         transfers.putIfAbsent(String.valueOf(transferObject.getId()), transferObject);
@@ -28,16 +27,10 @@ public class TransferRepository {
         return transfers.containsKey(id);
     }
 
-    //mock
     public boolean smsVerify(Confirmation confirmation) {
         if (confirmation.getCode().equals("0000")) {
             return transfers.containsKey(confirmation.getOperationId());
         }
         return false;
-    }
-
-    //mock
-    public boolean checkCardsInDB(TransferRequest transfer) {
-        return true;
     }
 }

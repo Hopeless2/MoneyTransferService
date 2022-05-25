@@ -32,10 +32,10 @@ class MoneyTransferServiceApplicationTests {
                 "    \"cardFromNumber\": \"1234123412341234\",\n" +
                 "    \"cardFromValidTill\": \"12/34\",\n" +
                 "    \"cardFromCVV\": \"123\",\n" +
-                "    \"cardToNumber\": \"1234123412341235\",\n" +
+                "    \"cardToNumber\": \"1234123412341233\",\n" +
                 "    \"amount\": {\n" +
                 "        \"value\": 1234,\n" +
-                "        \"currency\": \"r\"\n" +
+                "        \"currency\": \"RUB\"\n" +
                 "    }\n" +
                 "}";
         HttpHeaders headers = new HttpHeaders();

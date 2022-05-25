@@ -18,8 +18,8 @@ public class TransferRepositoryTest {
         System.out.println("Running MessageSenderTest");
         suiteStartTime = System.nanoTime();
         TransferAmount amount = new TransferAmount(1234, "rub");
-        transferRequest = new TransferRequest("1234123412341234", "1234", "123", "2345234523452345",amount);
-        transferObject = new TransferObject(transferRequest, "1");
+        transferRequest = new TransferRequest("1234123412341234", "1234", "123", "2345234523452345", amount);
+        transferObject = new TransferObject(transferRequest, "1", TransactionStatus.AWAIT_CONFIRMATION);
     }
 
     @AfterAll
@@ -70,13 +70,6 @@ public class TransferRepositoryTest {
 
         transferRepository.putTransferObject(transferObject);
         boolean result = transferRepository.smsVerify(confirmation);
-
-        assertTrue(result);
-    }
-
-    @Test
-    public void checkCardsInDB_test_success() {
-        boolean result = transferRepository.checkCardsInDB(transferRequest);
 
         assertTrue(result);
     }

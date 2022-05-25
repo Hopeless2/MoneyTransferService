@@ -1,6 +1,7 @@
 package com.example.moneytransferservice.service;
 
 import com.example.moneytransferservice.model.*;
+import com.example.moneytransferservice.repository.CardRepository;
 import com.example.moneytransferservice.repository.TransferRepository;
 import org.junit.jupiter.api.*;
 
@@ -17,8 +18,8 @@ public class TransferServiceTest {
     public static void initSuite() {
         System.out.println("Running MessageSenderTest");
         suiteStartTime = System.nanoTime();
-        TransferAmount amount = new TransferAmount(1234, "rub");
-        transferRequest = new TransferRequest("1234123412341234", "1234", "123", "2345234523452345", amount);
+        TransferAmount amount = new TransferAmount(1234, "RUB");
+        transferRequest = new TransferRequest("1234123412341234", "12/34", "123", "1234123412341233", amount);
     }
 
     @AfterAll
@@ -31,7 +32,8 @@ public class TransferServiceTest {
         System.out.println("Starting new test");
         testStartTime = System.nanoTime();
         TransferRepository transferRepository = new TransferRepository();
-        service = new TransferService(transferRepository);
+        CardRepository cardRepository = new CardRepository();
+        service = new TransferService(transferRepository, cardRepository);
     }
 
     @AfterEach
